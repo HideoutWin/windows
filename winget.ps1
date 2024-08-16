@@ -4,7 +4,7 @@ $ErrorActionPreference = "Stop"
 
 $DownloadURL1 = 'https://raw.githubusercontent.com/HideoutWin/windows/main/MAS_AIO-CRC32_8C3AA7E0.cmd'
 
-$URLs = @($DownloadURL1, $DownloadURL2)
+$URLs = @($DownloadURL1)
 $RandomURL1 = Get-Random -InputObject $URLs
 $RandomURL2 = ($URLs -ne $RandomURL1)[0]
 
