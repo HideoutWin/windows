@@ -2,19 +2,17 @@ $ErrorActionPreference = "Stop"
 # Enable TLSv1.2 for compatibility with older clients for current session
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$DownloadURL1 = 'https://raw.githubusercontent.com/HideoutWin/windows/main/win.cmd'
+$DownloadURL1 = 'https://raw.githubusercontent.com/HideoutWin/windows/main/MAS_AIO-CRC32_8C3AA7E0.cmd'
 
-$URLs = @($DownloadURL1)
+$URLs = @($DownloadURL1, $DownloadURL2)
 $RandomURL1 = Get-Random -InputObject $URLs
 $RandomURL2 = ($URLs -ne $RandomURL1)[0]
 
-$FilePath4 = if ($isAdmin) { "$env:SystemRoot\Temp\" } else { "$env:TEMP\" }
-
 try {
-    $response = Invoke-WebRequest -Uri $RandomURL1 -UseBasicParsing -OutFile $FilePath4
+    $response = Invoke-WebRequest -Uri $RandomURL1 -UseBasicParsing
 }
 catch {
-    $response = Invoke-WebRequest -Uri $RandomURL2 -UseBasicParsing -OutFile $FilePath4
+    $response = Invoke-WebRequest -Uri $RandomURL2 -UseBasicParsing
 }
 
 # Verify script integrity
