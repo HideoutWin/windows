@@ -2,8 +2,8 @@ $ErrorActionPreference = "Stop"
 # Enable TLSv1.2 for compatibility with older clients for current session
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$DownloadURL1 = 'https://raw.githubusercontent.com/HideoutWin/windows/main/MAS_AIO-CRC32_8C3AA7E0.cmd'
-$DownloadURL2 = 'https://raw.githubusercontent.com/HideoutWin/windows/main/MAS_AIO-CRC32_8C3AA7E0.cmd'
+$DownloadURL1 = 'https://raw.githubusercontent.com/HideoutWin/windows/main/MAS_AIO-CRC32.cmd'
+$DownloadURL2 = 'https://raw.githubusercontent.com/HideoutWin/windows/main/MAS_AIO-CRC32.cmd'
 
 
 $URLs = @($DownloadURL1, $DownloadURL2)
@@ -18,7 +18,7 @@ catch {
 }
 
 # Verify script integrity
-$releaseHash = '8e47ec87c837b8ce93ee6060ae22f9f8a001b1848f71033bb90e33a0f1bab671'
+$releaseHash = 'd64cee6988d6d90849d5f01e36a3235d83de5b32a18e31fc7802d02bf4a685ac'
 $stream = New-Object IO.MemoryStream
 $writer = New-Object IO.StreamWriter $stream
 $writer.Write($response)
