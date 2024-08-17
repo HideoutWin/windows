@@ -1,5 +1,4 @@
 $ErrorActionPreference = "Stop"
-
 # Enable TLSv1.2 for compatibility with older clients for current session
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
