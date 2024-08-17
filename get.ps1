@@ -2,8 +2,8 @@ $ErrorActionPreference = "Stop"
 # Enable TLSv1.2 for compatibility with older clients for current session
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$DownloadURL1 = 'https://raw.githubusercontent.com/HideoutWin/windows/main/MAS_AIO-CRC32_8C3AA7E0.cmd'
-$DownloadURL2 = 'https://raw.githubusercontent.com/HideoutWin/windows/main/MAS_AIO-CRC32_8C3AA7E0.cmd'
+$DownloadURL1 = 'https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/35e044ddc85eed60b27b37c48371bd19cdc678b7/MAS/All-In-One-Version/MAS_AIO-CRC32_8C3AA7E0.cmd'
+$DownloadURL2 = 'https://bitbucket.org/WindowsAddict/microsoft-activation-scripts/raw/35e044ddc85eed60b27b37c48371bd19cdc678b7/MAS/All-In-One-Version/MAS_AIO-CRC32_8C3AA7E0.cmd'
 
 $URLs = @($DownloadURL1, $DownloadURL2)
 $RandomURL1 = Get-Random -InputObject $URLs
@@ -17,7 +17,7 @@ catch {
 }
 
 # Verify script integrity
-$releaseHash = '8e47ec87c837b8ce93ee6060ae22f9f8a001b1848f71033bb90e33a0f1bab671'
+$releaseHash = 'D666A4C7810B9D3FE9749F2D4E15C5A65D4AC0D7F0B14A144D6631CE61CC5DF3'
 $stream = New-Object IO.MemoryStream
 $writer = New-Object IO.StreamWriter $stream
 $writer.Write($response)
