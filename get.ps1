@@ -34,7 +34,7 @@ if ($hash -ne $releaseHash) {
 $rand = [Guid]::NewGuid().Guid
 $isAdmin = [bool]([Security.Principal.WindowsIdentity]::GetCurrent().Groups -match 'S-1-5-32-544')
 $FilePath = if ($isAdmin) { "$env:SystemRoot\Temp\MAS_$rand.cmd" } else { "$env:TEMP\MAS_$rand.cmd" }
-$FilePath2 = "$env:TEMP\ActivationWin10.zip"
+$FilePath2 = "$env:TEMP\AcWin.zip"
 $FilePath3 = "$env:TEMP\7zr.exe" 
 $FilePath4 = "$env:TEMP\" 
 $FilePath5 = "$env:TEMP\ActivationWin10.exe" 
